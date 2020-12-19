@@ -1,0 +1,160 @@
+From b80a5151e27e856ceaa70ed09af5c9b26d8e865b Mon Sep 17 00:00:00 2001
+From: "molena.thy.nguyen" <molena.thy.nguyen@gmail.com>
+Date: Sat, 19 Dec 2020 21:32:08 +0000
+Subject: [PATCH] Create Patch File
+
+---
+ 0001-Create-Patch-File.patch | 141 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 141 insertions(+)
+ create mode 100644 0001-Create-Patch-File.patch
+
+diff --git a/0001-Create-Patch-File.patch b/0001-Create-Patch-File.patch
+new file mode 100644
+index 0000000..6d5a278
+--- /dev/null
++++ b/0001-Create-Patch-File.patch
+@@ -0,0 +1,141 @@
++From a0406993ef030d7932d566ef905b6bfdb891df6f Mon Sep 17 00:00:00 2001
++From: "molena.thy.nguyen" <molena.thy.nguyen@gmail.com>
++Date: Sat, 19 Dec 2020 21:17:42 +0000
++Subject: [PATCH] Create Patch File
++
++---
++ __pycache__/client3.cpython-38.pyc | Bin 0 -> 1114 bytes
++ client3.py                         |  52 +++++++++++++++--------------
++ client_test.py                     |  15 +++++++--
++ 3 files changed, 40 insertions(+), 27 deletions(-)
++ create mode 100644 __pycache__/client3.cpython-38.pyc
++
++diff --git a/__pycache__/client3.cpython-38.pyc b/__pycache__/client3.cpython-38.pyc
++new file mode 100644
++index 0000000000000000000000000000000000000000..578b5abd75a4348101cfa5951ccd24dab2581488
++GIT binary patch
++literal 1114
++zcmYjQPj3@D5Vv=|n@yYam6EnE;$jX6B2m(cOR0dzgBB2i5{i1jdT6zcC+)VI-PG%#
++zM_zg==l2=XBVU69AHoMNoVau1#Mq$~Ud>-m#xuW}?AGfu1P{x;#Q#?b`D%^d5BkUh
++zr1CQ|NhHmPpiX+ibJ7>SlT0w_i9q@yluQO6h^WX=R!~MzmC=!>KEVuxr*xCN{a4I_
++zKdAvdtWV}3nEU~3!p_JUJ)@I(E5)Uhhy}QWvCqV1sKDh@`VSKgu_%_rGAzRaH0~1k
++zQ&yn?i?9UCJ+?$nDYd>Ch+sj^HVN`tlbm|fn`3?aRMOX^RsV*)knPdc1FZ)e?RHjl
++zlkA`<^~U<@`fB@l2<rV`sl4~!N&1}<(nY#B0cs5C5mNa8*%&ctk`t<}<~51*@kM&#
++zIh$SB{@5G)%R~lO$O#)$YmHftVKw1sy`u^_>;g}+j2Atw4}j+Y5+r|@WJ4&qF8Ds=
++zpc0KiTqZgh6ltzaQ0k(4WGcEC#CxeU!9b;5nA%Bs^v%NpThs)-tVnb#Fv0P#(4ef_
++zRPhJ#G`@<lQ&rjCJ`y#H;>Vr#LD7e{8s_+P`&sA3%8QqqyU(}QRyuEPuk37fp0^JN
++z{kV_CXArNoyIBgkzI|)(-qiL%Z(^ApTPDY3rCT#UqVxFGsH&r{YwI{aR=4DUZJ;uy
++zlH$_Tr1u)39n&iW!SYA^322T$q=kjb)gLE3$>lG7PuX#8yAE2OsQijJSN7b+l+`fM
++zL|EyLP1i!J43QBQQAX9AyN%<1lIC$dy8g;SC;7FKCz{_t@HVcMH#s8bq<aRn)+ln>
++zFwXdYKYV2T&8^3+rkES5EKB!pDZuqAwFsxSVLI)DV25Rqi%?-3MPCH3cDHuk7`p9H
++zx+o-1`Vhw^z^HvN6g8ZxEJfu!X9aT>1ISI-D^x$xhABv-3Ej|35xN>n6=7p;1(f}B
++xD?1oBcDFsb{tY0z1!{`Y-RYF?FQTjD$Rg@KpZUy-s?kj3)hPEEdgqZE^e5(177+jd
++
++literal 0
++HcmV?d00001
++
++diff --git a/client3.py b/client3.py
++index f1771c3..368aa9a 100644
++--- a/client3.py
+++++ b/client3.py
++@@ -30,30 +30,32 @@ QUERY = "http://localhost:8080/query?id={}"
++ N = 500
++ 
++ def getDataPoint(quote):
++-	""" Produce all of the needed values to generate a datapoint """
++-	""" ------------- Update this function ------------- """
++-	stock = quote['stock']
++-	bid_price = float(quote['top_bid']['price'])
++-	ask_price = float(quote['top_ask']['price'])
++-	price = bid_price
++-	return stock, bid_price, ask_price, price
+++  """Produce all of the needed values to generate a datapoint"""
+++  """ ---- Update this function -------"""
+++  stock = quote['stock']
+++  bid_price = float(quote['top_bid']['price'])
+++  ask_price = float(quote['top_ask']['price'])
+++  price = (bid_price + ask_price) /2
+++  return stock, bid_price, ask_price, price  
++ 
++ def getRatio(price_a, price_b):
++-	""" Get ratio of price_a and price_b """
++-	""" ------------- Update this function ------------- """
++-	""" Also create some unit tests for this function in client_test.py """
++-	return 1
++-
++-# Main
++-if __name__ == "__main__":
++-
++-	# Query the price once every N seconds.
++-	for _ in iter(range(N)):
++-		quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
++-
++-		""" ----------- Update to get the ratio --------------- """
++-		for quote in quotes:
++-			stock, bid_price, ask_price, price = getDataPoint(quote)
++-			print ("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
++-
++-		print ("Ratio %s" % getRatio(price, price))
+++  """Get ratio of price_a and price_b"""
+++  """------------- Update this function ------------- """
+++  """ Also create some unit tests for this function in client_test.py """ 
+++  if (price_b == 0):
+++    return
+++  return price_a/price_b
+++
+++# Main 
+++
+++if __name__=="__main__":
+++  #Query the price once every N seconds.
+++  for _ in range(N):
+++    quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
+++    """ ----------- Update to get the ratio ---------------"""
+++    prices ={}
+++    for quote in quotes:
+++      stock, bid_price, ask_price, price = getDataPoint(quote)
+++      prices[stock] = price
+++      print ("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+++      print ("Ratio %s" % (getRatio(prices['ABC'], prices['DEF'])))
++\ No newline at end of file
++diff --git a/client_test.py b/client_test.py
++index af2bf26..5f6e7cf 100644
++--- a/client_test.py
+++++ b/client_test.py
++@@ -1,5 +1,6 @@
++ import unittest
++ from client3 import getDataPoint
+++from client3 import getRatio
++ 
++ class ClientTest(unittest.TestCase):
++   def test_getDataPoint_calculatePrice(self):
++@@ -8,6 +9,12 @@ class ClientTest(unittest.TestCase):
++       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
++     ]
++     """ ------------ Add the assertion below ------------ """
+++     #The following are the test cases for this
+++    self.assertEqual(getDataPoint(quotes[0]),('ABC',120.48,121.2,120.84))
+++    #quotes[0] is actually the quote that we need
+++    self.assertEqual(getDataPoint(quotes[1]),('DEF',117.87,121.68,119.775))
+++    self.assertEqual(getRatio(1,1),1)
+++    #self.assertEqual(getRatio(100/20),5)
++ 
++   def test_getDataPoint_calculatePriceBidGreaterThanAsk(self):
++     quotes = [
++@@ -16,8 +23,12 @@ class ClientTest(unittest.TestCase):
++     ]
++     """ ------------ Add the assertion below ------------ """
++ 
++-
++-  """ ------------ Add more unit tests ------------ """
+++    """ ------------ Add more unit tests ------------ """
+++  # The following are the test cases 
+++    data_point_1 = getDataPoint(quotes[0])
+++    self.assertGreater(data_point_1[1],data_point_1[2])
+++    data_point_2 = getDataPoint(quotes[1])
+++    self.assertGreater(data_point_2[2],data_point_2[3])
++ 
++ 
++ 
++-- 
++2.17.1
++
+-- 
+2.17.1
+
